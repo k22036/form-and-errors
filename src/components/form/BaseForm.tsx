@@ -1,49 +1,42 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { fieldConfigs, formFields } from "@/lib/constants/form";
 import type { FormData, FormField } from "@/lib/types/form";
 import SubmitSuccess from "./SubmitSuccess";
 
 type BaseFormProps = {
-  errors?: Record<FormField, string>;
   submitHandler?: (data: FormData) => void;
 };
 
-const BaseForm: React.FC<BaseFormProps> = ({ errors, submitHandler }) => {
-  const [form, setForm] = useState<FormData>({
-    name: "",
-    email: "",
-    inquiry: "",
+const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitSuccessful },
+    reset,
+  } = useForm<FormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      inquiry: "",
+    },
   });
 
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name as FormField]: value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", form);
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     if (submitHandler) {
       try {
-        submitHandler(form);
-        setSubmitted(true);
+        submitHandler(data);
       } catch (error) {
         console.error(error);
       }
-      return;
     }
-    setSubmitted(true);
+    reset();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {Object.keys(formFields).map((key) => {
         const field = key as FormField;
         const config = fieldConfigs[field];
@@ -54,31 +47,32 @@ const BaseForm: React.FC<BaseFormProps> = ({ errors, submitHandler }) => {
             {config.type === "textarea" ? (
               <textarea
                 id={id}
-                name={formFields[field]}
-                value={form[field]}
-                onChange={handleChange}
-                required
+                {...register(field, { required: `${config.label}は必須です` })}
+                className="block w-full border rounded p-2"
               />
             ) : (
               <input
                 id={id}
                 type={config.type}
-                name={formFields[field]}
-                value={form[field]}
-                onChange={handleChange}
-                required
+                {...register(field, { required: `${config.label}は必須です` })}
+                className="block w-full border rounded p-2"
               />
             )}
-            {errors?.[field] && (
+            {errors[field] && (
               <p className="mt-1 text-sm text-red-600" id={`${id}-error`}>
-                {errors[field]}
+                {errors[field]?.message as string}
               </p>
             )}
           </div>
         );
       })}
-      <button type="submit">送信</button>
-      {submitted && <SubmitSuccess />}
+      <button
+        type="submit"
+        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+      >
+        送信
+      </button>
+      {isSubmitSuccessful && <SubmitSuccess />}
     </form>
   );
 };
