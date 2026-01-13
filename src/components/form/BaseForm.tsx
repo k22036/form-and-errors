@@ -36,30 +36,42 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-md mx-auto bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md space-y-6"
+    >
       {Object.keys(formFields).map((key) => {
         const field = key as FormField;
         const config = fieldConfigs[field];
         const id = `form-${field}`;
         return (
-          <div key={field}>
-            <label htmlFor={id}>{config.label}</label>
+          <div key={field} className="space-y-2">
+            <label
+              htmlFor={id}
+              className="block text-gray-700 dark:text-gray-200 font-semibold mb-1"
+            >
+              {config.label}
+            </label>
             {config.type === "textarea" ? (
               <textarea
                 id={id}
                 {...register(field, { required: `${config.label}は必須です` })}
-                className="block w-full border rounded p-2"
+                className="block w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 transition"
+                rows={5}
               />
             ) : (
               <input
                 id={id}
                 type={config.type}
                 {...register(field, { required: `${config.label}は必須です` })}
-                className="block w-full border rounded p-2"
+                className="block w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 transition"
               />
             )}
             {errors[field] && (
-              <p className="mt-1 text-sm text-red-600" id={`${id}-error`}>
+              <p
+                className="text-sm text-red-600 dark:text-red-400 mt-1"
+                id={`${id}-error`}
+              >
                 {errors[field]?.message as string}
               </p>
             )}
@@ -68,7 +80,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
       })}
       <button
         type="submit"
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+        className="w-full py-3 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white dark:text-gray-100 font-bold rounded-lg shadow transition mt-6"
       >
         送信
       </button>
