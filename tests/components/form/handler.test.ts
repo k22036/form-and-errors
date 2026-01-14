@@ -17,7 +17,7 @@ const mockData: InquiryFormValues = {
 };
 
 describe("submitHandler", () => {
-  test("バリデーション・送信・後処理がすべて呼ばれる", async () => {
+  test("should call validation, send, and afterHandler", async () => {
     const validator = vi.fn();
     const afterHandler = vi.fn();
 
@@ -28,7 +28,7 @@ describe("submitHandler", () => {
     expect(afterHandler).toHaveBeenCalledWith(mockData);
   });
 
-  test("バリデーションなしでも送信・後処理が呼ばれる", async () => {
+  test("should call send and afterHandler even without validation", async () => {
     const afterHandler = vi.fn();
 
     await submitHandler(mockData, undefined, afterHandler);
@@ -37,7 +37,7 @@ describe("submitHandler", () => {
     expect(afterHandler).toHaveBeenCalledWith(mockData);
   });
 
-  test("後処理なしでもバリデーション・送信が呼ばれる", async () => {
+  test("should call validation and send even without afterHandler", async () => {
     const validator = vi.fn();
 
     await submitHandler(mockData, validator);

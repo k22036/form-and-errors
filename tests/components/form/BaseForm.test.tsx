@@ -5,7 +5,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import BaseForm from "@/components/form/BaseForm";
 
 describe("BaseForm", () => {
-  test("正常にフォーム送信できる", async () => {
+  test("should submit form with valid data", async () => {
     const mockSubmit = vi.fn();
 
     render(<BaseForm submitHandler={mockSubmit} />);
