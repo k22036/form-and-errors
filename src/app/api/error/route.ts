@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
+import { createLoader, parseAsInteger } from "nuqs/server";
 import { errorDefinitions } from "@/lib/constants/errors";
 
+const coordinatesSearchParams = {
+  status: parseAsInteger,
+};
+
+const loadRequestParams = createLoader(coordinatesSearchParams);
+
 export async function GET(request: Request) {
-  // クエリパラメータでstatusを受け取る
-  const { searchParams } = new URL(request.url);
-  const status = Number(searchParams.get("status")) || undefined;
+  // 未定義かの判定のために初期値はnull
+  const { status } = loadRequestParams(request);
 
   // 定義から該当エラーを取得
   const errorDef = errorDefinitions.find((e) => e.status === status);
