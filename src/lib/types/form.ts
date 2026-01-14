@@ -1,7 +1,7 @@
-export interface FormData {
+export interface InquiryFormValues {
   name: string;
   email: string;
   inquiry: string;
 }
 
-export type FormField = keyof FormData;
+export type InquiryFormField = keyof InquiryFormValues;

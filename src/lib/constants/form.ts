@@ -1,7 +1,7 @@
-import type { FormField } from "../types/form";
+import type { InquiryFormField } from "../types/form";
 import type { IdenticalKeyValue } from "../types/helper";
 
-export const formFields: IdenticalKeyValue<FormField> = {
+export const formFields: IdenticalKeyValue<InquiryFormField> = {
   name: "name",
   email: "email",
   inquiry: "inquiry",
@@ -9,7 +9,7 @@ export const formFields: IdenticalKeyValue<FormField> = {
 
 // ラベルやinputのtypeなどの定義
 export const fieldConfigs: Record<
-  FormField,
+  InquiryFormField,
   { label: string; type: "text" | "email" | "textarea" }
 > = {
   name: { label: "名前", type: "text" },

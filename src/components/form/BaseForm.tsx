@@ -3,11 +3,11 @@
 import type React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { fieldConfigs, formFields } from "@/lib/constants/form";
-import type { FormData, FormField } from "@/lib/types/form";
+import type { InquiryFormField, InquiryFormValues } from "@/lib/types/form";
 import SubmitSuccess from "./SubmitSuccess";
 
 type BaseFormProps = {
-  submitHandler?: (data: FormData) => void;
+  submitHandler?: (data: InquiryFormValues) => Promise<void> | void;
 };
 
 const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
@@ -16,7 +16,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     reset,
-  } = useForm<FormData>({
+  } = useForm<InquiryFormValues>({
     defaultValues: {
       name: "",
       email: "",
@@ -24,10 +24,10 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
     },
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<InquiryFormValues> = async (data) => {
     if (submitHandler) {
       try {
-        submitHandler(data);
+        await submitHandler(data);
       } catch (error) {
         console.error(error);
       }
@@ -41,7 +41,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
       className="max-w-md mx-auto bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md space-y-6"
     >
       {Object.keys(formFields).map((key) => {
-        const field = key as FormField;
+        const field = key as InquiryFormField;
         const config = fieldConfigs[field];
         const id = `form-${field}`;
         return (
