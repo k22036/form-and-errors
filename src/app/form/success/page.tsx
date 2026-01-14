@@ -1,11 +1,7 @@
+"use client";
 import BaseForm from "@/components/form/BaseForm";
-import { sendToServer } from "@/lib/server/server";
-import type { InquiryFormValues } from "@/lib/types/form";
+import { submitHandler } from "@/components/form/handler";
 
 export default function Page() {
-  const submitHandler = async (data: InquiryFormValues) => {
-    "use server";
-    await sendToServer(data);
-  };
-  return <BaseForm submitHandler={submitHandler} />;
+  return <BaseForm submitHandler={(data) => submitHandler(data)} />;
 }
