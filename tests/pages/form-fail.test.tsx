@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 // Mock dependencies
-const redirectOK = vi.fn();
-vi.mock("@/app/form/success/redirect", () => ({
-  redirectOK,
+const redirectNG = vi.fn();
+vi.mock("@/app/form/fail/redirect", () => ({
+  redirectNG,
 }));
 
 vi.mock("@/lib/server/server", () => ({
@@ -19,7 +19,7 @@ vi.mock("nuqs", () => ({
 }));
 
 // Dynamic import to ensure mocks are applied
-const { default: Page } = await import("@/app/form/success/page");
+const { default: Page } = await import("@/app/form/fail/page");
 
 describe("Page", () => {
   const submit = () => {
@@ -37,25 +37,25 @@ describe("Page", () => {
     // 送信ボタンをクリック
     fireEvent.click(screen.getByRole("button", { name: "送信" }));
   };
-  test("renders SuccessForm when shouldRedirect is false", () => {
+  test("renders FailForm when shouldRedirect is false", () => {
     useQueryState.mockReturnValue([false]);
     render(<Page />);
 
     submit();
     waitFor(() => {
-      expect(screen.getByText("送信が完了しました")).toBeInTheDocument();
-      expect(screen.queryByText("送信に失敗しました")).not.toBeInTheDocument();
+      expect(screen.getByText("送信に失敗しました")).toBeInTheDocument();
+      expect(screen.queryByText("送信が完了しました")).not.toBeInTheDocument();
       expect(screen.queryByText("トップへ戻る")).not.toBeInTheDocument();
     });
   });
 
-  test("renders SuccessForm when shouldRedirect is true", () => {
+  test("renders FailForm when shouldRedirect is true", () => {
     useQueryState.mockReturnValue([true]);
     render(<Page />);
 
     submit();
     waitFor(() => {
-      expect(screen.getByText("送信が完了しました")).toBeInTheDocument();
+      expect(screen.queryByText("送信に失敗しました")).toBeInTheDocument();
       expect(screen.getByText("トップへ戻る")).toBeInTheDocument();
     });
   });

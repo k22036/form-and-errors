@@ -1,9 +1,11 @@
 "use client";
 
 import type React from "react";
+import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { fieldConfigs, formFields } from "@/lib/constants/form";
 import type { InquiryFormField, InquiryFormValues } from "@/lib/types/form";
+import SubmitFail from "./SubmitFail";
 import SubmitSuccess from "./SubmitSuccess";
 
 type BaseFormProps = {
@@ -11,6 +13,8 @@ type BaseFormProps = {
 };
 
 const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
+  const [submitError, setSubmitError] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,10 +29,12 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
   });
 
   const onSubmit: SubmitHandler<InquiryFormValues> = async (data) => {
+    setSubmitError(false);
     if (submitHandler) {
       try {
         await submitHandler(data);
       } catch (error) {
+        setSubmitError(true);
         console.error(error);
       }
     }
@@ -84,7 +90,8 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
       >
         送信
       </button>
-      {isSubmitSuccessful && <SubmitSuccess />}
+      {!submitError && isSubmitSuccessful && <SubmitSuccess />}
+      {submitError && <SubmitFail />}
     </form>
   );
 };
