@@ -1,6 +1,6 @@
 "use client";
 import { parseAsBoolean, useQueryState } from "nuqs";
-import { redirectOk } from "@/app/form/success/redirect";
+import { redirectOK } from "@/app/form/success/redirect";
 import BaseForm from "@/components/form/BaseForm";
 import { submitHandler } from "@/components/form/handler";
 
@@ -10,7 +10,7 @@ export default function Page() {
     parseAsBoolean.withDefault(false),
   );
 
-  const afterHandler = shouldRedirect ? redirectOk : undefined;
+  const afterHandler = shouldRedirect ? redirectOK : undefined;
 
   return (
     <BaseForm

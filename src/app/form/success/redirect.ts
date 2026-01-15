@@ -1,6 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
 
-export const redirectOk = async () => {
+export const redirectOK = async () => {
   redirect("/form/success/done");
 };

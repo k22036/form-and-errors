@@ -3,9 +3,9 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 // Mock dependencies
-const redirectOk = vi.fn();
+const redirectOK = vi.fn();
 vi.mock("@/app/form/success/redirect", () => ({
-  redirectOk,
+  redirectOK,
 }));
 
 vi.mock("@/lib/server/server", () => ({
