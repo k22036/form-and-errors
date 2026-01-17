@@ -1,8 +1,7 @@
-import Link from "next/link";
+import ErrorTimeoutPageList from "@/components/home/ErrorTimeoutPageList";
 import FormFailList from "@/components/home/FormFailList";
 import FormSuccessList from "@/components/home/FormSuccessList";
 import MainPageList from "@/components/home/MainPageList";
-import { errorStatuses } from "@/lib/constants/errors";
 
 export default function Home() {
   return (
@@ -22,40 +21,7 @@ export default function Home() {
         <FormSuccessList />
 
         {/* エラー&タイムアウトページ一覧 */}
-        <section className="w-full mt-12">
-          <h2 className="text-xl font-semibold mb-6 text-blue-700 dark:text-blue-300 text-center">
-            エラー＆タイムアウトページ一覧
-          </h2>
-
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {errorStatuses.map((status) => (
-              <li key={status}>
-                <Link href={`/api/error?status=${status}`}>
-                  <div className="p-5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer shadow flex flex-col items-center">
-                    <span className="text-gray-800 dark:text-gray-100 font-medium text-lg">
-                      エラーコード {status} ページ
-                    </span>
-                    <span className="text-xs text-gray-400 mt-1">
-                      /api/error?status={status}
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href="/api/timeout">
-                <div className="p-5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer shadow flex flex-col items-center">
-                  <span className="text-gray-800 dark:text-gray-100 font-medium text-lg">
-                    タイムアウトページ
-                  </span>
-                  <span className="text-xs text-gray-400 mt-1">
-                    /api/timeout
-                  </span>
-                </div>
-              </Link>
-            </li>
-          </ul>
-        </section>
+        <ErrorTimeoutPageList />
       </main>
     </div>
   );
