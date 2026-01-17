@@ -32,3 +32,5 @@ export const errorDefinitions = [
     message: "サービスは現在利用できません",
   },
 ] as const;
+
+export const errorStatuses = errorDefinitions.map((e) => e.status);
