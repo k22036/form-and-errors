@@ -1,5 +1,6 @@
 "use client";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ReturnToTop from "@/components/form/ReturnToTop";
 
 export default function Page() {
   return (
@@ -12,12 +13,7 @@ export default function Page() {
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           お手数ですが、再度お試しください。
         </p>
-        <a
-          href="/"
-          className="inline-block px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg shadow hover:bg-blue-700 dark:hover:bg-blue-600 transition"
-        >
-          トップへ戻る
-        </a>
+        <ReturnToTop />
       </div>
     </div>
   );
