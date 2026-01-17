@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 import { createLoader, parseAsInteger } from "nuqs/server";
 import { errorDefinitions } from "@/lib/constants/errors";
 
-const coordinatesSearchParams = {
+const errorSearchParams = {
   status: parseAsInteger,
 };
 
-const loadRequestParams = createLoader(coordinatesSearchParams);
+const loadRequestParams = createLoader(errorSearchParams);
 
 export async function GET(request: Request) {
   // 未定義かの判定のために初期値はnull
