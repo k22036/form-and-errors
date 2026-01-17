@@ -36,6 +36,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
       } catch (error) {
         setSubmitError(true);
         console.error(error);
+        return;
       }
     }
     reset();
