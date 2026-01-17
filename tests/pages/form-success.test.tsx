@@ -37,26 +37,32 @@ describe("Page", () => {
     // 送信ボタンをクリック
     fireEvent.click(screen.getByRole("button", { name: "送信" }));
   };
-  test("renders SuccessForm when shouldRedirect is false", () => {
+  test("renders SuccessForm when shouldRedirect is false", async () => {
     useQueryState.mockReturnValue([false]);
     render(<Page />);
 
     submit();
-    waitFor(() => {
-      expect(screen.getByText("送信が完了しました")).toBeInTheDocument();
-      expect(screen.queryByText("送信に失敗しました")).not.toBeInTheDocument();
+    await waitFor(() => {
+      // 表示内容
+      expect(screen.getByText("送信が完了しました。")).toBeInTheDocument();
+      expect(
+        screen.queryByText("送信に失敗しました。"),
+      ).not.toBeInTheDocument();
       expect(screen.queryByText("トップへ戻る")).not.toBeInTheDocument();
+
+      // リダイレクトされない
+      expect(redirectOK).not.toHaveBeenCalled();
     });
   });
 
-  test("renders SuccessForm when shouldRedirect is true", () => {
+  test("renders SuccessForm when shouldRedirect is true", async () => {
     useQueryState.mockReturnValue([true]);
     render(<Page />);
 
     submit();
-    waitFor(() => {
-      expect(screen.getByText("送信が完了しました")).toBeInTheDocument();
-      expect(screen.getByText("トップへ戻る")).toBeInTheDocument();
+    await waitFor(() => {
+      // リダイレクトされる
+      expect(redirectOK).toHaveBeenCalled();
     });
   });
 });
