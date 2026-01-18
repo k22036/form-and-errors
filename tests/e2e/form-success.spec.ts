@@ -76,7 +76,10 @@ test.describe("Form Success Tests", () => {
     await fillForm(page);
     await submitForm(page);
 
-    await expect(page.getByText("送信が完了しました")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "送信が完了しました" }),
+    ).toBeVisible();
+
     const backToTop = page.getByText("トップへ戻る").first();
     await expect(backToTop).toBeVisible();
     await backToTop.click();
