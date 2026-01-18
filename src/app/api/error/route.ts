@@ -18,13 +18,19 @@ export async function GET(request: Request) {
   if (errorDef) {
     return NextResponse.json(
       { error: errorDef.error, message: errorDef.message },
-      { status: errorDef.status },
+      {
+        status: errorDef.status,
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+      },
     );
   } else {
     // 未定義の場合
     return NextResponse.json(
       { error: "Unknown Error", message: "未定義のエラーです" },
-      { status: 500 },
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+      },
     );
   }
 }
