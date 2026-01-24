@@ -1,4 +1,4 @@
-name: CI
+name: Playwright Tests
 on:
   push:
     branches:
@@ -9,38 +9,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.0-noble
+      options: --init --ipc=host
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Install unzip
+        run: apt-get update && apt-get install -y unzip
+
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
         run: bun install
 
-      - name: Type check
-        run: bun type-check
-
-      - name: Lint
-        run: bun biome ci
-
-      - name: Build
-        run: bun run build
-
-      - name: Run tests
-        run: bun test
-
-      # e2e Tests
-      - name: Install Playwright Browsers
-        run: bunx playwright install --with-deps
-
       - name: Run E2E Tests
         run: bun test:e2e
+        env:
+          HOME: /root
 
       - uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
+          retention-days: 30
