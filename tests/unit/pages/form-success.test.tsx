@@ -38,15 +38,22 @@ describe("Page", () => {
     fireEvent.click(screen.getByRole("button", { name: "送信" }));
   };
 
+  const mockQueryState = (redirect: boolean, header: string) => {
+    useQueryState.mockImplementation((key: string) => {
+      if (key === "redirect") return [redirect];
+      if (key === "header") return [header];
+      return [null];
+    });
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
     sendToServer.mockResolvedValue({ ok: true });
+    mockQueryState(false, "お問い合わせフォーム");
   });
 
   test("renders SuccessForm when shouldRedirect is false", async () => {
-    useQueryState
-      .mockReturnValueOnce([false]) // redirect
-      .mockReturnValueOnce(["お問い合わせフォーム"]); // header
+    mockQueryState(false, "お問い合わせフォーム");
     render(<Page />);
 
     submit();
@@ -62,9 +69,7 @@ describe("Page", () => {
   });
 
   test("renders SuccessForm when shouldRedirect is true", async () => {
-    useQueryState
-      .mockReturnValueOnce([true]) // redirect
-      .mockReturnValueOnce(["お問い合わせフォーム"]); // header
+    mockQueryState(true, "お問い合わせフォーム");
     render(<Page />);
 
     submit();
@@ -75,9 +80,7 @@ describe("Page", () => {
   });
 
   test("calls sendToServer with input values", async () => {
-    useQueryState
-      .mockReturnValueOnce([false]) // redirect
-      .mockReturnValueOnce(["お問い合わせフォーム"]); // header
+    mockQueryState(false, "お問い合わせフォーム");
     render(<Page />);
 
     submit();
@@ -94,9 +97,7 @@ describe("Page", () => {
 
   test("shows error UI and does not redirect when submission fails", async () => {
     sendToServer.mockRejectedValueOnce(new Error("network error"));
-    useQueryState
-      .mockReturnValueOnce([true]) // redirect
-      .mockReturnValueOnce(["お問い合わせフォーム"]); // header
+    mockQueryState(true, "お問い合わせフォーム");
     render(<Page />);
 
     submit();
@@ -108,9 +109,7 @@ describe("Page", () => {
   });
 
   test("renders custom header from query state", () => {
-    useQueryState
-      .mockReturnValueOnce([false]) // redirect
-      .mockReturnValueOnce(["カスタムヘッダー"]); // header
+    mockQueryState(false, "カスタムヘッダー");
     render(<Page />);
 
     expect(screen.getByText("カスタムヘッダー")).toBeInTheDocument();
