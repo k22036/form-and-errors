@@ -10,7 +10,7 @@ describe("BaseForm", () => {
     render(<BaseForm headerText={headerText} />);
 
     expect(screen.getByText(headerText)).toBeInTheDocument();
-  })
+  });
 
   test("should submit form with valid data", async () => {
     const mockSubmit = vi.fn();

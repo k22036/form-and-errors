@@ -9,7 +9,10 @@ export default function Page() {
     "redirect",
     parseAsBoolean.withDefault(false),
   );
-  const [headerText] = useQueryState("header", parseAsString.withDefault("お問い合わせフォーム"));
+  const [headerText] = useQueryState(
+    "header",
+    parseAsString.withDefault("お問い合わせフォーム"),
+  );
 
   const afterHandler = shouldRedirect ? redirectOK : undefined;
 

@@ -53,7 +53,9 @@ describe("Page", () => {
 
     await waitFor(() => {
       expect(screen.getByText("送信が完了しました。")).toBeInTheDocument();
-      expect(screen.queryByText("送信に失敗しました。")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText("送信に失敗しました。"),
+      ).not.toBeInTheDocument();
       expect(screen.queryByText("トップへ戻る")).not.toBeInTheDocument();
       expect(redirectOK).not.toHaveBeenCalled();
     });
