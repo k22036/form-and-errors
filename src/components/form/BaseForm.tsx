@@ -9,10 +9,11 @@ import SubmitFail from "./SubmitFail";
 import SubmitSuccess from "./SubmitSuccess";
 
 type BaseFormProps = {
+  headerText?: string;
   submitHandler?: (data: InquiryFormValues) => Promise<void> | void;
 };
 
-const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
+const BaseForm: React.FC<BaseFormProps> = ({ headerText, submitHandler }) => {
   const [submitError, setSubmitError] = useState(false);
 
   const {
@@ -47,6 +48,11 @@ const BaseForm: React.FC<BaseFormProps> = ({ submitHandler }) => {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-md mx-auto bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md space-y-6"
     >
+      {headerText && (
+        <p className="text-gray-800 dark:text-gray-200 text-lg font-semibold mb-4">
+          {headerText}
+        </p>
+      )}
       {Object.keys(formFields).map((key) => {
         const field = key as InquiryFormField;
         const config = fieldConfigs[field];
