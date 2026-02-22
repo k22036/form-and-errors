@@ -16,6 +16,7 @@ const useQueryState = vi.fn();
 vi.mock("nuqs", () => ({
   useQueryState,
   parseAsBoolean: { withDefault: vi.fn() },
+  parseAsString: { withDefault: vi.fn() },
 }));
 
 // Dynamic import to ensure mocks are applied
