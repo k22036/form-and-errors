@@ -5,6 +5,13 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import BaseForm from "@/components/form/BaseForm";
 
 describe("BaseForm", () => {
+  test("should render form header", async () => {
+    const headerText = "テストフォーム";
+    render(<BaseForm headerText={headerText} />);
+
+    expect(screen.getByText(headerText)).toBeInTheDocument();
+  });
+
   test("should submit form with valid data", async () => {
     const mockSubmit = vi.fn();
 

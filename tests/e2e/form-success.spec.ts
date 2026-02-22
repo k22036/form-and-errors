@@ -86,4 +86,12 @@ test.describe("Form Success Tests", () => {
     await page.waitForLoadState("load");
     await expect(page).toHaveURL("/");
   });
+
+  test("should work /form/success?header=テストフォーム", async ({ page }) => {
+    const url = "/form/success?header=テストフォーム";
+    await page.goto(url);
+    await page.waitForLoadState("load");
+
+    await expect(page.getByText("テストフォーム")).toBeVisible();
+  });
 });
