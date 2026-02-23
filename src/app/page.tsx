@@ -6,7 +6,8 @@ import MainPageList from "@/components/home/MainPageList";
 
 export const metadata: Metadata = {
   title: "テスト用ページ一覧",
-  description: "フォームやエラーページなど、各種テスト用ページへのリンク一覧です。",
+  description:
+    "フォームやエラーページなど、各種テスト用ページへのリンク一覧です。",
 };
 
 export default function Home() {

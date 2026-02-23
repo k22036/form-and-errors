@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "障害発生",
-  description: "現在、システムに障害が発生しています。復旧までしばらくお待ちください。",
+  description:
+    "現在、システムに障害が発生しています。復旧までしばらくお待ちください。",
 };
 
 export default function ErrorPage() {
