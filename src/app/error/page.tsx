@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "障害発生",
+  description:
+    "現在、システムに障害が発生しています。復旧までしばらくお待ちください。",
+};
+
 export default function ErrorPage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-[#fff0f0]">
