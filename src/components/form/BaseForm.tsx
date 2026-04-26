@@ -93,7 +93,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ headerText, submitHandler }) => {
       })}
       <button
         type="submit"
-        className="w-full py-3 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white dark:text-gray-100 font-bold rounded-lg shadow transition mt-6"
+        className="w-full py-3 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-bold rounded-lg shadow transition mt-6"
       >
         送信
       </button>
