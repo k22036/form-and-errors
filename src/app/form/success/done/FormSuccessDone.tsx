@@ -1,5 +1,5 @@
 "use client";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutlined";
 import ReturnToTop from "@/components/form/ReturnToTop";
 
 export default function FormSuccessDone() {

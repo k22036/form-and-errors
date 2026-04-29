@@ -1,5 +1,5 @@
 "use client";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlined";
 import ReturnToTop from "@/components/form/ReturnToTop";
 
 export default function FormFailDone() {
