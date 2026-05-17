@@ -46,10 +46,10 @@ const BaseForm: React.FC<BaseFormProps> = ({ headerText, submitHandler }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-md mx-auto bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md space-y-6"
+      className="max-w-md mx-auto bg-white dark:bg-zinc-900 p-8 rounded-lg shadow-md space-y-6"
     >
       {headerText && (
-        <p className="text-gray-800 dark:text-gray-200 text-lg font-semibold mb-4">
+        <p className="text-zinc-800 dark:text-zinc-200 text-lg font-semibold mb-4">
           {headerText}
         </p>
       )}
@@ -61,7 +61,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ headerText, submitHandler }) => {
           <div key={field} className="space-y-2">
             <label
               htmlFor={id}
-              className="block text-gray-700 dark:text-gray-200 font-semibold mb-1"
+              className="block text-zinc-700 dark:text-zinc-200 font-semibold mb-1"
             >
               {config.label}
             </label>
@@ -69,7 +69,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ headerText, submitHandler }) => {
               <textarea
                 id={id}
                 {...register(field, { required: `${config.label}は必須です` })}
-                className="block w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 transition"
+                className="block w-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 transition"
                 rows={5}
               />
             ) : (
@@ -77,7 +77,7 @@ const BaseForm: React.FC<BaseFormProps> = ({ headerText, submitHandler }) => {
                 id={id}
                 type={config.type}
                 {...register(field, { required: `${config.label}は必須です` })}
-                className="block w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 transition"
+                className="block w-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 transition"
               />
             )}
             {errors[field] && (

@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-gray-950">
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-zinc-950">
       <main className="flex w-full max-w-3xl flex-col items-center justify-center py-24 px-6 bg-white dark:bg-zinc-900 rounded-xl shadow-lg">
-        <h1 className="text-3xl font-semibold mb-10 text-gray-900 dark:text-gray-100 text-center">
+        <h1 className="text-3xl font-semibold mb-10 text-zinc-900 dark:text-zinc-100 text-center">
           テスト用ページ一覧
         </h1>
 
