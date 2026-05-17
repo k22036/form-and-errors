@@ -22,11 +22,11 @@ const ErrorTimeoutPageList: React.FC = () => (
       {errorLinks.map((link) => (
         <li key={link.href}>
           <Link href={link.href}>
-            <div className="p-5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer shadow flex flex-col items-center">
-              <span className="text-gray-800 dark:text-gray-100 font-medium text-lg">
+            <div className="p-5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-pointer shadow flex flex-col items-center">
+              <span className="text-zinc-800 dark:text-zinc-100 font-medium text-lg">
                 {link.label}
               </span>
-              <span className="text-xs text-gray-400 mt-1">
+              <span className="text-xs text-zinc-400 mt-1">
                 {link.description}
               </span>
             </div>
@@ -35,11 +35,11 @@ const ErrorTimeoutPageList: React.FC = () => (
       ))}
       <li>
         <Link href={timeoutLink.href}>
-          <div className="p-5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition cursor-pointer shadow flex flex-col items-center">
-            <span className="text-gray-800 dark:text-gray-100 font-medium text-lg">
+          <div className="p-5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-pointer shadow flex flex-col items-center">
+            <span className="text-zinc-800 dark:text-zinc-100 font-medium text-lg">
               {timeoutLink.label}
             </span>
-            <span className="text-xs text-gray-400 mt-1">
+            <span className="text-xs text-zinc-400 mt-1">
               {timeoutLink.description}
             </span>
           </div>
