@@ -48,4 +48,4 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: millionco/react-doctor@c16e8ea6f6cd455c837d02aafedb916817a4008e # main
+      - uses: millionco/react-doctor@0b64af58b16329c5cae7a210463d2842e34b150d # main
